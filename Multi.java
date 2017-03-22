@@ -26,7 +26,7 @@ class Multi {
 				input = keyboard.nextInt();
 				if (input == nb1 * nb2){
 					win++;
-					System.out.println("Correct");
+					System.out.println((char)27 +"[32m Correct !" + (char)27 + "[0m");
 					System.out.println("=======\n");
 					if (played == 10)
 						System.out.println("Results");
@@ -34,20 +34,21 @@ class Multi {
 				if (input != nb1 * nb2) {
 					failed++;
 					if (failed == 1)
-						System.out.println("False, try again");
+						System.out.println((char)27 +"[31m False, try again" + (char)27 + "[0m");
 					if (failed == 2) {
-						System.out.println("False, Next Round");
+						System.out.println((char)27 +"[31m False, Next Round" + (char)27 + "[0m");
+						lose++;
 						break;
 					}
 				}
 			}
 		}
-		System.out.print("Won Rounds : ");
+		System.out.print((char)27 +"[32m" + (char)27 +"[1m Won Rounds : " + (char)27 + "[0m");
 		System.out.print(win);
-		System.out.print("\nLost Rounds : ");
+		System.out.print((char)27 +"[31m" + (char)27 +"[1m \nLost Rounds : " + (char)27 + "[0m");
 		System.out.print(lose);
 		System.out.print("\n Save Score? [y/n]");
-		Scanner keyb = new Scanner (System.in);		// TODO avoid creation of a second keyboard
+		Scanner keyb = new Scanner (System.in);
 		String ans = keyb.nextLine();
 		if (yes.equals(ans)) {
 			try(FileWriter fw = new FileWriter("Scores.txt", true);
