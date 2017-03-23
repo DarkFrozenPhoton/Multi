@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Date;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
@@ -12,6 +13,7 @@ class Multi {
 		Scanner keyboard = new Scanner (System.in);
 		String yes = "y";
 		int failed = 0, played = 0, input = 0, lose = 0, win = 0;
+		long start = System.currentTimeMillis();
 		while (played < 10 && failed < 3){
 			failed = 0;
 			Random rand = new Random();
@@ -20,16 +22,13 @@ class Multi {
 			played++;
 			while ( input != nb1 * nb2){
 				System.out.print(nb1);
-				System.out.print("x");
-				System.out.print(nb2);
-				System.out.println();
+				System.out.print(" x ");
+				System.out.println(nb2);
 				input = keyboard.nextInt();
 				if (input == nb1 * nb2){
 					win++;
 					System.out.println((char)27 +"[32m Correct !" + (char)27 + "[0m");
 					System.out.println("=======\n");
-					if (played == 10)
-						System.out.println("Results");
 				}
 				if (input != nb1 * nb2) {
 					failed++;
@@ -41,13 +40,18 @@ class Multi {
 						break;
 					}
 				}
+				if (played == 10)
+					System.out.println("Results :");
 			}
 		}
-		System.out.print((char)27 +"[32m" + (char)27 +"[1m Won Rounds : " + (char)27 + "[0m");
-		System.out.print(win);
-		System.out.print((char)27 +"[31m" + (char)27 +"[1m \nLost Rounds : " + (char)27 + "[0m");
-		System.out.print(lose);
-		System.out.print("\n Save Score? [y/n]");
+		long time = System.currentTimeMillis() - start;
+		System.out.print((char)27 + "[32m" + (char)27 + "[1m\tWon Rounds\t" + (char)27 + "[0m");
+		System.out.println(win);
+		System.out.print((char)27 + "[31m" + (char)27 + "[1m\tLost Rounds\t" + (char)27 + "[0m");
+		System.out.println(lose);
+		System.out.print((char)27 + "[34m" + (char)27 + "[1m\tTime\t\t" + (char)27 + "[0m");
+		System.out.println(String.format("%d s", time / 1000));
+		System.out.print("\nSave Score? [y/n]");
 		Scanner keyb = new Scanner (System.in);
 		String ans = keyb.nextLine();
 		if (yes.equals(ans)) {
@@ -59,7 +63,8 @@ class Multi {
 					out.print(win);
 					out.print("\t\t\tLost Rounds : ");
 					out.print(lose);
-					out.print("\n");
+					out.print("\t\t\tTime : ");
+					out.println(String.format("%d s", time / 1000));
 				} catch (IOException e) {}
 			keyb.close();
 			keyboard.close();
