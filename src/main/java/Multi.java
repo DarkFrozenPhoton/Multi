@@ -19,7 +19,6 @@ class Multi {
 			Random rand = new Random();
 			int nb1 = rand.nextInt(10)+1;
 			int nb2 = rand.nextInt(10)+1;
-			played++;
 			while ( input != nb1 * nb2){
 				System.out.print(nb1);
 				System.out.print(" x ");
@@ -29,6 +28,7 @@ class Multi {
 					win++;
 					System.out.println((char)27 +"[32m Correct !" + (char)27 + "[0m");
 					System.out.println("=======\n");
+					played++;
 				}
 				if (input != nb1 * nb2) {
 					failed++;
@@ -36,6 +36,7 @@ class Multi {
 						System.out.println((char)27 +"[31m False, try again" + (char)27 + "[0m");
 					if (failed == 2) {
 						System.out.println((char)27 +"[31m False, Next Round" + (char)27 + "[0m");
+						played++;
 						lose++;
 						break;
 					}
