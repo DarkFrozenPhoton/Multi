@@ -14,17 +14,21 @@ class Multi {
 		String yes = "y";
 		int failed = 0, played = 0, input = 0, lose = 0, win = 0;
 		long start = System.currentTimeMillis();
+		//variables initialization
 
 		while (played < 10 && failed < 3) {
+			//game loop
 			failed = 0;
 			Random rand = new Random();
 			int nb1 = rand.nextInt(10)+1;
 			int nb2 = rand.nextInt(10)+1;
+			//generates the number from 1 to 10
 
 			while (input != nb1 * nb2) {
 				String strInput = JOptionPane.showInputDialog(nb1 + "x" + nb2 + "=");
+				//outputs the calcultation
 
-				if(isInteger(strInput))
+				if(isInteger(strInput))			//tests if the string is a number
 					input = Integer.parseInt(strInput);
 				else {
 					JOptionPane.showMessageDialog(null, "Please enter a number", "Multi", JOptionPane.PLAIN_MESSAGE);
@@ -53,16 +57,16 @@ class Multi {
 			}
 		}
 
-		System.out.println("\nResults:");
-
 		long time = System.currentTimeMillis() - start;
 
+		System.out.println("\nResults:");
 		System.out.print((char)27 + "[32m" + (char)27 + "[1m\tWon Rounds\t" + (char)27 + "[0m");
 		System.out.println(win);
 		System.out.print((char)27 + "[31m" + (char)27 + "[1m\tLost Rounds\t" + (char)27 + "[0m");
 		System.out.println(lose);
 		System.out.print((char)27 + "[34m" + (char)27 + "[1m\tTime\t\t" + (char)27 + "[0m");
 		System.out.println(String.format("%d s", time / 1000));
+		//prints the results (wins-loses-time spent)
 
 		System.out.print("\nSave Score? [y/n]");
 
@@ -70,6 +74,7 @@ class Multi {
 		String ans = keyb.nextLine();
 
 		if (yes.equals(ans)) {
+			//saves the score in a file
 			try(FileWriter fw = new FileWriter("Scores.txt", true);
 				BufferedWriter	bw	= new BufferedWriter(fw);
 				PrintWriter	out	= new PrintWriter(bw))
