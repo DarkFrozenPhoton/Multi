@@ -1,3 +1,3 @@
 mkdir build -p
-javac src/*.java -d build
+javac src/Multi.java -d build
 cd build && java Multi
